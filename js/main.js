@@ -47,6 +47,10 @@ $( document ).ready(function() {
   var l = null;
   var r = null;
 
+
+
+
+
   Leap.loop(function(frame){
 
     // var crossProduct = Leap.vec3.create();
@@ -94,6 +98,8 @@ $( document ).ready(function() {
 
       var lf = l.fingers;
       var rf = r.fingers;
+      var lExtended = lf[0].extended && lf[1].extended && lf[2].extended && lf[3].extended && lf[4].extended
+      var rExtended = rf[0].extended && rf[1].extended && rf[2].extended && rf[3].extended && rf[4].extended
 
       if(//LETTER A
         // all finger on L hand extended and index on R hand extended.
@@ -112,111 +118,136 @@ console.log(dist);
           voicePlay(text)
         }
 
-      } else if( //LETTER B
-          // pinky, ring and middle finger on R and L hand extended.
-        lf[2].extended && lf[3].extended && lf[4].extended && rf[2].extended && rf[3].extended && rf[4].extended
-      ){
-        // var xdist = lf[0].tipPosition[0] - rf[1].tipPosition[0];
-        // var ydist = lf[0].tipPosition[1] - rf[1].tipPosition[1];
-        // var zdist = lf[0].tipPosition[2] - rf[1].tipPosition[2];
-        // var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
+        } else if( //LETTER B
+          lf[2].extended && lf[3].extended && lf[4].extended && rf[2].extended && rf[3].extended && rf[4].extended
+        ){
+          var xdistL = lf[0].tipPosition[0] - lf[1].tipPosition[0];
+          var ydistL = lf[0].tipPosition[1] - lf[1].tipPosition[1];
+          var zdistL = lf[0].tipPosition[2] - lf[1].tipPosition[2];
+          var lDist = Math.sqrt( xdistL*xdistL + ydistL*ydistL + zdistL*zdistL );
 
-        if ( dist < 20 ){
-          frameString += 'YOU MADE THE LETTER "B" MOUTHFUCKER' + dist + '<br>';
-          text = 'B'
-          voicePlay(text)
+          var xdistR = rf[0].tipPosition[0] - rf[1].tipPosition[0];
+          var ydistR = rf[0].tipPosition[1] - rf[1].tipPosition[1];
+          var zdistR = rf[0].tipPosition[2] - rf[1].tipPosition[2];
+          var rDist = Math.sqrt( xdistR*xdistR + ydistR*ydistR + zdistR*zdistR );
+
+
+          if ( lDist < 20 && rDist < 20 ){
+            frameString += 'YOU MADE THE LETTER "B" MOUTHFUCKER' + dist + '<br>';
+            text = 'B'
+            voicePlay(text)
+          }
         }
-      }
-      // else if (//LETTER D
-      // ) {
-      //
-      // } else if (//LETTER E
-      // ) {
-      //
-      // } else if (//LETTER F
-      // ) {
-      //
-      // } else if (//LETTER G
-      // ) {
-      //
-      // } else if (//LETTER H
-      // ) {
-      //
-      // } else if (//LETTER I
-      // ) {
-      //
-      // } else if (//LETTER J
-      // ) {
-      //
-      // } else if (//LETTER K
-      // ) {
-      //
-      // } else if (//LETTER L
-      // ) {
-      //
-      // } else if (//LETTER M
-      // ) {
-      //
-      // } else if (//LETTER N
-      // ) {
-      //
-      // } else if (//LETTER O
-      // ) {
-      //
-      // } else if (//LETTER P
-      // ) {
-      //
-      // } else if (//LETTER Q
-      // ) {
-      //
-      // } else if (//LETTER R
-      // ) {
-      //
-      // } else if (//LETTER S
-      // ) {
-      //
-      // } else if (//LETTER T
-      // ) {
-      //
-      // } else if (//LETTER U
-      // ) {
-      //
-      // } else if (//LETTER V
-      // ) {
-      //
-      // } else if (//LETTER W
-      // ) {
-      //
-      // } else if (//LETTER X
-      // ) {
-      //
-      // } else if (//LETTER Y
-      // ) {
-      //
-      // } else if (//LETTER Z
-      // ) {
-      //
-      // }
+        // else if (//LETTER D
+        // lf[1].extended && rf[0].extended && rf[1].extended
+        // ){
+        //   var xdistI = lf[0].tipPosition[0] - rf[1].tipPosition[0];
+        //   var ydistI = lf[0].tipPosition[1] - rf[1].tipPosition[1];
+        //   var zdistI = lf[0].tipPosition[2] - rf[1].tipPosition[2];
+        //   var iDist = Math.sqrt( xdistI*xdistI + ydistI*ydistI + zdistI*zdistI );
+        //
+        //   var xdistT = lf[0].tipPosition[0] - rf[1].tipPosition[0];
+        //   var ydistT = lf[0].tipPosition[1] - rf[1].tipPosition[1];
+        //   var zdistT = lf[0].tipPosition[2] - rf[1].tipPosition[2];
+        //   var tDist = Math.sqrt( xdistT*xdistT + ydistT*ydistT + zdistT*zdistT );
+        //
+        //
+        //   if ( lDist < 20 && rDist < 20 ){
+        //     frameString += 'YOU MADE THE LETTER "D" MOUTHFUCKER' + dist + '<br>';
+        //     text = 'D'
+        //     voicePlay(text)
+        //   }
+        // }
+        //else if (//LETTER E
+        // ) {
+        //
+        // } else if (//LETTER F
+        // ) {
+        //
+        // } else if (//LETTER G
+        // ) {
+        //
+        // } else if (//LETTER H
+        // ) {
+        //
+        // } else if (//LETTER I
+        // ) {
+        //
+        // } else if (//LETTER J
+        // ) {
+        //
+        // } else if (//LETTER K
+        // ) {
+        //
+        // } else if (//LETTER L
+        // ) {
+        //
+        // } else if (//LETTER M
+        // ) {
+        //
+        // } else if (//LETTER N
+        // ) {
+        //
+        // } else if (//LETTER O
+        // ) {
+        //
+        // } else if (//LETTER P
+        // ) {
+        //
+        // } else if (//LETTER Q
+        // ) {
+        //
+        // } else if (//LETTER R
+        // ) {
+        //
+        // } else if (//LETTER S
+        // ) {
+        //
+        // } else if (//LETTER T
+        // ) {
+        //
+        // } else if (//LETTER U
+        // ) {
+        //
+        // } else if (//LETTER V
+        // ) {
+        //
+        // } else if (//LETTER W
+        // ) {
+        //
+        // } else if (//LETTER X
+        // ) {
+        //
+        // } else if (//LETTER Y
+        // ) {
+        //
+        // } else if (//LETTER Z
+        // ) {
+        //
+        // }
     } else if ((l && !r) || (!l && r)){
       var hand = frame.hands[0];
 
         if ( hand.fingers[2].extended && !hand.fingers[0].extended && !hand.fingers[1].extended && !hand.fingers[3].extended && !hand.fingers[4].extended) /*If someone flipped the bird*/{
             $("#celine").attr("src", $("#celine").attr("src").replace("autoplay=0", "autoplay=1"));
 
-        }
-        else if ( //LETTER C
+        } else if ( //LETTER C
         hand.fingers[0].extended && hand.fingers[1].extended && !hand.fingers[2].extended && !hand.fingers[3].extended && !hand.fingers[4].extended
-      ) {
-        var xdist = hand.fingers[0].tipPosition[0] - hand.fingers[1].tipPosition[0];
-        var ydist = hand.fingers[0].tipPosition[1] - hand.fingers[1].tipPosition[1];
-        var zdist = hand.fingers[0].tipPosition[2] - hand.fingers[1].tipPosition[2];
-        var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
+        ) {
+          var xdist = hand.fingers[0].tipPosition[0] - hand.fingers[1].tipPosition[0];
+          var ydist = hand.fingers[0].tipPosition[1] - hand.fingers[1].tipPosition[1];
+          var zdist = hand.fingers[0].tipPosition[2] - hand.fingers[1].tipPosition[2];
+          var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
 
-          if ( dist > 70 && dist < 105 ){
-            frameString += 'YOU MADE THE LETTER "C" MOUTHFUCKER' + dist + '<br>';
-            text = 'C'
-            voicePlay(text)
-          }
+            if ( dist > 70 && dist < 105 ){
+              frameString += 'YOU MADE THE LETTER "C" MOUTHFUCKER' + dist + '<br>';
+              text = 'C'
+              voicePlay(text)
+            }
+        } else if ( //HELLO
+        hand.fingers[0].extended && hand.fingers[1].extended && hand.fingers[2].extended && hand.fingers[3].extended && hand.fingers[4].extended
+        ) {
+          $("#oh-hi-mark").attr("src", $("#oh-hi-mark").attr("src").replace("autoplay=0", "autoplay=1&start=6"));
         }
       }
 
