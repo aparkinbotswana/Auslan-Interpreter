@@ -1,7 +1,7 @@
 
 $( document ).ready(function() {
 
-var text = "A"
+var text = "I am a dirty little robot"
 function voicePlay(text){
 if(responsiveVoice.voiceSupport()) {
 
@@ -123,7 +123,7 @@ voicePlay(text)
     frameString += "<br>";
 
 
-    if(l && r){
+    if(l && r){ // both l & r visible
 
       var lf = l.fingers;
       var rf = r.fingers;
@@ -146,9 +146,36 @@ voicePlay(text)
           frameString += 'INDEX EXTEND TEST!' + dist + '<br>';
         }
 
+      } else if(
+        // all finger on L hand extended and index on R hand extended.
+        (lf[0].extended && lf[1].extended && lf[2].extended && lf[3].extended && lf[4].extended && rf[1].extended)
+        // no other fingers on R extended
+        && (!rf[0].extended && !rf[2].extended && !rf[3].extended && !rf[4].extended)
+      ){
+        var xdist = lf[0].tipPosition[0] - rf[1].tipPosition[0];
+        var ydist = lf[0].tipPosition[1] - rf[1].tipPosition[1];
+        var zdist = lf[0].tipPosition[2] - rf[1].tipPosition[2];
+        var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
+
+        if ( dist < 20 ){
+          frameString += 'YOU MADE THE LETTER "A" MOUTHFUCKER' + dist + '<br>';
+          text = 'A'
+          voicePlay(text)
+        }
+
       }
 
-    } // both l & r visible
+// following else if evaluates when there is one hand in frame. Still slightly broken.
+    } /*else if ((l && !r) || (!l && r)) {
+
+      var lf = l.fingers;
+      // var rf = r.fingers;
+
+      if (
+      lf[2].extended) {
+        frameString += 'naughty'
+      }
+    }*/
 
 
 
