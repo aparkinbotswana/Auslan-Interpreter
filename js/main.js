@@ -94,6 +94,8 @@ $( document ).ready(function() {
     frameString += "<br>";
 
 
+
+
     if(l && r){ // both l & r visible
 
       var lf = l.fingers;
@@ -101,26 +103,43 @@ $( document ).ready(function() {
       var lExtended = lf[0].extended && lf[1].extended && lf[2].extended && lf[3].extended && lf[4].extended
       var rExtended = rf[0].extended && rf[1].extended && rf[2].extended && rf[3].extended && rf[4].extended
 
-      if(//LETTER A
-        // all finger on L hand extended and index on R hand extended.
-        (lf[0].extended && lf[1].extended && lf[2].extended && lf[3].extended && lf[4].extended && rf[1].extended)
-        // no other fingers on R extended
-        && (!rf[0].extended && !rf[2].extended && !rf[3].extended && !rf[4].extended)
-        ){
-        var xdist = lf[0].tipPosition[0] - rf[1].tipPosition[0];
-        var ydist = lf[0].tipPosition[1] - rf[1].tipPosition[1];
-        var zdist = lf[0].tipPosition[2] - rf[1].tipPosition[2];
-        var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
-console.log(dist);
-        if ( dist < 20 ){
-          frameString += 'YOU MADE THE LETTER "A" MOUTHFUCKER' + dist + '<br>';
-          text = 'A'
-          voicePlay(text)
-        }
+      if (lExtended) {
+        if (rf[1].extended && !rf[0].extended && !rf[2].extended && !rf[3].extended && !rf[4].extended) {
 
-        } else if( //LETTER B
-          lf[2].extended && lf[3].extended && lf[4].extended && rf[2].extended && rf[3].extended && rf[4].extended
-        ){
+          var xdist = lf[0].tipPosition[0] - rf[1].tipPosition[0];
+          var ydist = lf[0].tipPosition[1] - rf[1].tipPosition[1];
+          var zdist = lf[0].tipPosition[2] - rf[1].tipPosition[2];
+          var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
+
+          console.log(dist);
+          if ( dist < 20 ){
+            frameString += 'YOU MADE THE LETTER "A" MOUTHFUCKER' + dist + '<br>';
+            text = 'A'
+            voicePlay(text)
+          }
+        } //LETTER A
+      }
+
+      // if(//LETTER A
+      //   // all finger on L hand extended and index on R hand extended.
+      //   (lf[0].extended && lf[1].extended && lf[2].extended && lf[3].extended && lf[4].extended && rf[1].extended)
+      //   // no other fingers on R extended
+      //   && (!rf[0].extended && !rf[2].extended && !rf[3].extended && !rf[4].extended)
+      //   ){
+      //   var xdist = lf[0].tipPosition[0] - rf[1].tipPosition[0];
+      //   var ydist = lf[0].tipPosition[1] - rf[1].tipPosition[1];
+      //   var zdist = lf[0].tipPosition[2] - rf[1].tipPosition[2];
+      //   var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
+      //   console.log(dist);
+      //   if ( dist < 20 ){
+      //     frameString += 'YOU MADE THE LETTER "A" MOUTHFUCKER' + dist + '<br>';
+      //     text = 'A'
+      //     voicePlay(text)
+      //   }
+      //
+      //   }
+        if ( lf[2].extended && lf[3].extended && lf[4].extended && rf[2].extended && rf[3].extended && rf[4].extended){
+
           var xdistL = lf[0].tipPosition[0] - lf[1].tipPosition[0];
           var ydistL = lf[0].tipPosition[1] - lf[1].tipPosition[1];
           var zdistL = lf[0].tipPosition[2] - lf[1].tipPosition[2];
@@ -137,7 +156,8 @@ console.log(dist);
             text = 'B'
             voicePlay(text)
           }
-        }
+        } //LETTER B
+
         // else if (//LETTER D
         // lf[1].extended && rf[0].extended && rf[1].extended
         // ){
@@ -253,30 +273,6 @@ console.log(dist);
 
 
     for (var i = 0; i < frame.hands.length; i++) {
-      // hand = frame.hands[i];
-      // handString = concatData("hand_type", hand.type);
-      // handString += concatData("pinch_strength", hand.pinchStrength);
-      // handString += concatData("grab_strength", hand.grabStrength);
-      // handString += concatData("confidence", hand.confidence);
-
-
-
-
-      // handString += '<br>'
-
-
-      // fingerString = concatJointPosition("finger_thumb_dip", hand.thumb.dipPosition);
-
-      // for (var j = 0; j < hand.fingers.length; j++) {
-      //   finger = hand.fingers[j];
-      //   fingerString += concatData("finger_type", finger.type) + " (" + getFingerName(finger.type) + ") <br>"
-      //   fingerString += concatData("finger_dip", finger.dipPosition);
-      //   fingerString += concatData("finger_pip", finger.pipPosition);
-      //   fingerString += concatData("finger_mcp", finger.mcpPosition);
-      //
-      //   fingerString += '<br>'
-      //
-      // }
 
       frameString += handString;
       frameString += fingerString;
