@@ -1,6 +1,14 @@
 
 $( document ).ready(function() {
 
+var text = "I am a dirty little robot"
+function voicePlay(text){
+if(responsiveVoice.voiceSupport()) {
+
+responsiveVoice.speak(text);
+}}
+voicePlay(text)
+
   var concatData = function(id, data) {
     return id + ": " + data + "<br>"
   }
@@ -146,56 +154,59 @@ $( document ).ready(function() {
 
 
     for (var i = 0; i < frame.hands.length; i++) {
-      hand = frame.hands[i];
-      handString = concatData("hand_type", hand.type);
-      handString += concatData("pinch_strength", hand.pinchStrength);
-      handString += concatData("grab_strength", hand.grabStrength);
-      handString += concatData("confidence", hand.confidence);
-      if ( frame.hands.length === 2 && (hand.type === 'left' && hand.fingers[1].extended && hand.fingers[2].extended && hand.fingers[3].extended && hand.fingers[4].extended) && (hand.type === 'right' && hand.fingers[1].extended )){
-        console.log("Letter 'A' MOUTHFUCKER!");
+      // hand = frame.hands[i];
+      // handString = concatData("hand_type", hand.type);
+      // handString += concatData("pinch_strength", hand.pinchStrength);
+      // handString += concatData("grab_strength", hand.grabStrength);
+      // handString += concatData("confidence", hand.confidence);
 
 
-      } else if (frame.hands.length === 2 && (hand.type === 'right' && hand.fingers[1].extended)){
-      // console.log("two hands right index extended!!!");
 
-      }else if (hand.type === 'right' && hand.fingers[1].extended){
-        // console.log("right index only!!!");
+      // if ( frame.hands.length === 2 && (hand.type === 'left' && hand.fingers[1].extended && hand.fingers[2].extended && hand.fingers[3].extended && hand.fingers[4].extended) && (hand.type === 'right' && hand.fingers[1].extended )){
+      //   console.log("Letter 'A' MOUTHFUCKER!");
+      //
+      //
+      // } else if (frame.hands.length === 2 && (hand.type === 'right' && hand.fingers[1].extended)){
+      // // console.log("two hands right index extended!!!");
+      //
+      // }else if (hand.type === 'right' && hand.fingers[1].extended){
+      //   // console.log("right index only!!!");
+      //
+      // }else if (hand.type === 'left' && hand.fingers[0].extended && hand.fingers[1].extended && hand.fingers[2].extended && hand.fingers[3].extended && hand.fingers[4].extended){
+      //   // console.log("all extended!!!");
+      //
+      // }else if (hand.type === 'left' && hand.fingers[0].extended){
+      //   // console.log("thumb!!!");
+      //
+      // }else if (hand.type === 'left' && hand.fingers[1].extended){
+      //   // console.log("Index!!!");
+      //
+      // }else if (hand.type === 'left' && hand.fingers[2].extended){
+      //   // console.log("Middle!!!");
+      //
+      // }else if (hand.type === 'left' && hand.fingers[3].extended){
+      //   // console.log("Ring!!!");
+      //
+      // }else if (hand.type === 'left' && hand.fingers[4].extended){
+      //   // console.log("Pinky!!!");
+      //
+      // }
 
-      }else if (hand.type === 'left' && hand.fingers[0].extended && hand.fingers[1].extended && hand.fingers[2].extended && hand.fingers[3].extended && hand.fingers[4].extended){
-        // console.log("all extended!!!");
-
-      }else if (hand.type === 'left' && hand.fingers[0].extended){
-        // console.log("thumb!!!");
-
-      }else if (hand.type === 'left' && hand.fingers[1].extended){
-        // console.log("Index!!!");
-
-      }else if (hand.type === 'left' && hand.fingers[2].extended){
-        // console.log("Middle!!!");
-
-      }else if (hand.type === 'left' && hand.fingers[3].extended){
-        // console.log("Ring!!!");
-
-      }else if (hand.type === 'left' && hand.fingers[4].extended){
-        // console.log("Pinky!!!");
-
-      }
-
-      handString += '<br>'
+      // handString += '<br>'
 
 
-      fingerString = concatJointPosition("finger_thumb_dip", hand.thumb.dipPosition);
+      // fingerString = concatJointPosition("finger_thumb_dip", hand.thumb.dipPosition);
 
-      for (var j = 0; j < hand.fingers.length; j++) {
-        finger = hand.fingers[j];
-        fingerString += concatData("finger_type", finger.type) + " (" + getFingerName(finger.type) + ") <br>"
-        fingerString += concatData("finger_dip", finger.dipPosition);
-        fingerString += concatData("finger_pip", finger.pipPosition);
-        fingerString += concatData("finger_mcp", finger.mcpPosition);
-
-        fingerString += '<br>'
-
-      }
+      // for (var j = 0; j < hand.fingers.length; j++) {
+      //   finger = hand.fingers[j];
+      //   fingerString += concatData("finger_type", finger.type) + " (" + getFingerName(finger.type) + ") <br>"
+      //   fingerString += concatData("finger_dip", finger.dipPosition);
+      //   fingerString += concatData("finger_pip", finger.pipPosition);
+      //   fingerString += concatData("finger_mcp", finger.mcpPosition);
+      //
+      //   fingerString += '<br>'
+      //
+      // }
 
       frameString += handString;
       frameString += fingerString;
