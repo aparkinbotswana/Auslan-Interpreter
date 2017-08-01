@@ -4,41 +4,10 @@ $( document ).ready(function() {
   function voicePlay(text){
     if(responsiveVoice.voiceSupport()) {
     responsiveVoice.speak(text);
-    }
-  }
+    }  //checks to see if browser supports text to speech
+  }  //close voicePlay function - converts string to audible speech
 
-  var concatData = function(id, data) {
-    return id + ": " + data + "<br>"
-  }
 
-  function getFingerName(fingerType){
-    switch (fingerType) {
-      case 0:
-        return 'Thumb';
-      break;
-
-      case 1:
-        return 'Index';
-      break;
-
-      case 2:
-        return 'Middle';
-      break;
-
-      case 3:
-        return 'Ring';
-      break;
-
-      case 4:
-        return 'Pinky';
-      break;
-    }
-  }
-
-  function concatJointPosition(id, position){
-    return id + ": " + position[0] + ", " + position[1] + ", " + position[2] + "<br>"
-
-  }
 
   var output = document.getElementById('output');
   var frameString = "", handString = "", fingerString = "";
@@ -46,8 +15,6 @@ $( document ).ready(function() {
 
   var l = null;
   var r = null;
-
-
 
 
 
