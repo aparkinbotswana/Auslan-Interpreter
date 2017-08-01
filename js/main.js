@@ -1,13 +1,11 @@
 
 $( document ).ready(function() {
 
-var text = "I am a dirty little robot"
-function voicePlay(text){
-if(responsiveVoice.voiceSupport()) {
-
-responsiveVoice.speak(text);
-}}
-voicePlay(text)
+  function voicePlay(text){
+    if(responsiveVoice.voiceSupport()) {
+    responsiveVoice.speak(text);
+    }
+  }
 
   var concatData = function(id, data) {
     return id + ": " + data + "<br>"
@@ -45,48 +43,17 @@ voicePlay(text)
   var output = document.getElementById('output');
   var frameString = "", handString = "", fingerString = "";
   var hand, finger;
-  //
-  // var options = { enableGestures: true};
-  //
 
   var l = null;
   var r = null;
 
-
-
-  Leap.loop(/*options,*/ function(frame){
-
-    // var crossProduct = Leap.vec3.create();
-    // var direction = frame.hands[0].direction;
-    // var normal = frame.hands[0].palmNormal;
-    //
-    // Leap.vec3.cross(crossProduct, direction, normal);
+  Leap.loop(function(frame){
 
     // var crossProduct = Leap.vec3.create();
     // var direction = hand.direction;
     // var normal = hand.palmNormal;
     //
     // Leap.vec3.cross(crossProduct, direction, normal);
-    //
-
-    // if(frame.valid && frame.gestures.length > 0){
-    // frame.gestures.forEach(function(gesture){
-    //     switch (gesture.type){
-    //       case "circle":
-    //           console.log("Circle Gesture");
-    //           break;
-    //       case "keyTap":
-    //           console.log("Key Tap Gesture");
-    //           break;
-    //       case "screenTap":
-    //           console.log("Screen Tap Gesture");
-    //           break;
-    //       case "swipe":
-    //           console.log("Swipe Gesture");
-    //           break;
-    //     }
-    //   });
-    // }
 
     frameString = concatData("frame_id", frame.id);
     frameString += concatData("num_hands", frame.hands.length);
@@ -128,56 +95,130 @@ voicePlay(text)
       var lf = l.fingers;
       var rf = r.fingers;
 
-      if(
-        // both index fingers extended
-        (lf[1].extended && rf[1].extended)
-        // no other fingers on L extended
-        && (!lf[0].extended && !lf[2].extended && !lf[3].extended && !lf[4].extended)
-        // no other fingers on R extended
-        && (!rf[0].extended && !rf[2].extended && !rf[3].extended && !rf[4].extended)
-      ){
-
-        var xdist = lf[1].tipPosition[0] - rf[1].tipPosition[0];
-        var ydist = lf[1].tipPosition[1] - rf[1].tipPosition[1];
-        var zdist = lf[1].tipPosition[2] - rf[1].tipPosition[2];
-        var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
-
-        if ( dist < 20 ){
-          frameString += 'INDEX EXTEND TEST!' + dist + '<br>';
-        }
-
-      } else if(
+      if(//LETTER A
         // all finger on L hand extended and index on R hand extended.
         (lf[0].extended && lf[1].extended && lf[2].extended && lf[3].extended && lf[4].extended && rf[1].extended)
         // no other fingers on R extended
         && (!rf[0].extended && !rf[2].extended && !rf[3].extended && !rf[4].extended)
-      ){
+        ){
         var xdist = lf[0].tipPosition[0] - rf[1].tipPosition[0];
         var ydist = lf[0].tipPosition[1] - rf[1].tipPosition[1];
         var zdist = lf[0].tipPosition[2] - rf[1].tipPosition[2];
         var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
-
+console.log(dist);
         if ( dist < 20 ){
           frameString += 'YOU MADE THE LETTER "A" MOUTHFUCKER' + dist + '<br>';
           text = 'A'
           voicePlay(text)
         }
 
+      } else if( //LETTER B
+          // pinky, ring and middle finger on R and L hand extended.
+        lf[2].extended && lf[3].extended && lf[4].extended && rf[2].extended && rf[3].extended && rf[4].extended
+      ){
+        // var xdist = lf[0].tipPosition[0] - rf[1].tipPosition[0];
+        // var ydist = lf[0].tipPosition[1] - rf[1].tipPosition[1];
+        // var zdist = lf[0].tipPosition[2] - rf[1].tipPosition[2];
+        // var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
+
+        if ( dist < 20 ){
+          frameString += 'YOU MADE THE LETTER "B" MOUTHFUCKER' + dist + '<br>';
+          text = 'B'
+          voicePlay(text)
+        }
       }
+      // else if (//LETTER D
+      // ) {
+      //
+      // } else if (//LETTER E
+      // ) {
+      //
+      // } else if (//LETTER F
+      // ) {
+      //
+      // } else if (//LETTER G
+      // ) {
+      //
+      // } else if (//LETTER H
+      // ) {
+      //
+      // } else if (//LETTER I
+      // ) {
+      //
+      // } else if (//LETTER J
+      // ) {
+      //
+      // } else if (//LETTER K
+      // ) {
+      //
+      // } else if (//LETTER L
+      // ) {
+      //
+      // } else if (//LETTER M
+      // ) {
+      //
+      // } else if (//LETTER N
+      // ) {
+      //
+      // } else if (//LETTER O
+      // ) {
+      //
+      // } else if (//LETTER P
+      // ) {
+      //
+      // } else if (//LETTER Q
+      // ) {
+      //
+      // } else if (//LETTER R
+      // ) {
+      //
+      // } else if (//LETTER S
+      // ) {
+      //
+      // } else if (//LETTER T
+      // ) {
+      //
+      // } else if (//LETTER U
+      // ) {
+      //
+      // } else if (//LETTER V
+      // ) {
+      //
+      // } else if (//LETTER W
+      // ) {
+      //
+      // } else if (//LETTER X
+      // ) {
+      //
+      // } else if (//LETTER Y
+      // ) {
+      //
+      // } else if (//LETTER Z
+      // ) {
+      //
+      // }
+    } else if ((l && !r) || (!l && r)){
+      var hand = frame.hands[0];
 
-// following else if evaluates when there is one hand in frame. Still slightly broken.
-    } /*else if ((l && !r) || (!l && r)) {
+        if ( hand.fingers[2].extended && !hand.fingers[0].extended && !hand.fingers[1].extended && !hand.fingers[3].extended && !hand.fingers[4].extended) /*If someone flipped the bird*/{
+            $("#celine").attr("src", $("#celine").attr("src").replace("autoplay=0", "autoplay=1"));
 
-      var lf = l.fingers;
-      // var rf = r.fingers;
+        }
+        else if ( //LETTER C
+        hand.fingers[0].extended && hand.fingers[1].extended && !hand.fingers[2].extended && !hand.fingers[3].extended && !hand.fingers[4].extended
+      ) {
+        var xdist = hand.fingers[0].tipPosition[0] - hand.fingers[1].tipPosition[0];
+        var ydist = hand.fingers[0].tipPosition[1] - hand.fingers[1].tipPosition[1];
+        var zdist = hand.fingers[0].tipPosition[2] - hand.fingers[1].tipPosition[2];
+        var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
 
-      if (
-      lf[2].extended) {
-        frameString += 'naughty'
+          if ( dist > 70 && dist < 105 ){
+            frameString += 'YOU MADE THE LETTER "C" MOUTHFUCKER' + dist + '<br>';
+            text = 'C'
+            voicePlay(text)
+          }
+        }
       }
-    }*/
-
-
 
 
     for (var i = 0; i < frame.hands.length; i++) {
@@ -189,35 +230,6 @@ voicePlay(text)
 
 
 
-      // if ( frame.hands.length === 2 && (hand.type === 'left' && hand.fingers[1].extended && hand.fingers[2].extended && hand.fingers[3].extended && hand.fingers[4].extended) && (hand.type === 'right' && hand.fingers[1].extended )){
-      //   console.log("Letter 'A' MOUTHFUCKER!");
-      //
-      //
-      // } else if (frame.hands.length === 2 && (hand.type === 'right' && hand.fingers[1].extended)){
-      // // console.log("two hands right index extended!!!");
-      //
-      // }else if (hand.type === 'right' && hand.fingers[1].extended){
-      //   // console.log("right index only!!!");
-      //
-      // }else if (hand.type === 'left' && hand.fingers[0].extended && hand.fingers[1].extended && hand.fingers[2].extended && hand.fingers[3].extended && hand.fingers[4].extended){
-      //   // console.log("all extended!!!");
-      //
-      // }else if (hand.type === 'left' && hand.fingers[0].extended){
-      //   // console.log("thumb!!!");
-      //
-      // }else if (hand.type === 'left' && hand.fingers[1].extended){
-      //   // console.log("Index!!!");
-      //
-      // }else if (hand.type === 'left' && hand.fingers[2].extended){
-      //   // console.log("Middle!!!");
-      //
-      // }else if (hand.type === 'left' && hand.fingers[3].extended){
-      //   // console.log("Ring!!!");
-      //
-      // }else if (hand.type === 'left' && hand.fingers[4].extended){
-      //   // console.log("Pinky!!!");
-      //
-      // }
 
       // handString += '<br>'
 
@@ -237,9 +249,9 @@ voicePlay(text)
 
       frameString += handString;
       frameString += fingerString;
-      // console.log(handString);
-    }
+
+    } //close frame.hands.length loop
 
     output.innerHTML = frameString;
-  })
-})
+  }) //close Leap.Loop
+}) //close document ready
