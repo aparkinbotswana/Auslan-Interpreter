@@ -1,7 +1,7 @@
 
 $( document ).ready(function() {
 
-var text = "I am a dirty little robot"
+var text = "A"
 function voicePlay(text){
 if(responsiveVoice.voiceSupport()) {
 
