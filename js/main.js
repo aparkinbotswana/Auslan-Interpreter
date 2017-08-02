@@ -51,6 +51,17 @@ $( document ).ready(function() {
       r = null;
     }
 
+// if (lf[1].extended && rf[1].extended) {
+//
+// var xdist = lf[1].tipPosition[0] - rf[1].tipPosition[0];
+// var ydist = lf[1].tipPosition[1] - rf[1].tipPosition[1];
+// var zdist = lf[1].tipPosition[2] - rf[1].tipPosition[2];
+// var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
+//
+// frameString += 'INDEX EXTEND TEST! ' + dist;
+//
+// }
+
     if(l && r){ // both l & r visible
       var lf = l.fingers;
       var rf = r.fingers;
@@ -95,6 +106,14 @@ $( document ).ready(function() {
           // distance between index and pinky finger
           // measuring for distance with letter U
 
+          var xdistY = lf[0].mcpPosition[0] - rf[1].tipPosition[0];
+          var ydistY = lf[0].mcpPosition[1] - rf[1].tipPosition[1];
+          var zdistY = lf[0].mcpPosition[2] - rf[1].tipPosition[2];
+          var distY = Math.sqrt( xdistY*xdistY + ydistY*ydistY + zdistY*zdistY );
+          // distance between index and base of thumb
+          // measuring for distance with letter Y
+
+
           if ( distA < 20 ){
             frameString += "A";
             text = 'A'
@@ -115,8 +134,59 @@ $( document ).ready(function() {
             text = 'U'
             voicePlay(text)
           } // LETTER U
-        } // A I O U closing
-      } // All extended closing
+          else if (distY < 20) {
+            frameString += "Y";
+            text = 'Y'
+            voicePlay(text)
+          } // LETTER Y
+        } // A I O U Y closing
+        else if (rf[1].extended && rf[2].extended) {
+          var xdistBase = lf[2].mcpPosition[0] - rf[2].tipPosition[0];
+          var ydistBase = lf[2].mcpPosition[1] - rf[2].tipPosition[1];
+          var zdistBase = lf[2].mcpPosition[2] - rf[2].tipPosition[2];
+          var distBase = Math.sqrt( xdistBase*xdistBase + ydistBase*ydistBase + zdistBase*zdistBase );
+          // distance between tip of middle finger right hand and base of middle finger left hand
+
+          var xdistWrist = lf[2].carpPosition[0] - rf[2].tipPosition[0];
+          var ydistWrist = lf[2].carpPosition[1] - rf[2].tipPosition[1];
+          var zdistWrist = lf[2].carpPosition[2] - rf[2].tipPosition[2];
+          var distWrist = Math.sqrt( xdistWrist*xdistWrist + ydistWrist*ydistWrist + zdistWrist*zdistWrist );
+          // distance between tip of index finger right hand and wrist left hand
+
+          if ( distBase < 20 && distWrist < 20 ){
+            frameString += "V";
+            text = 'V'
+            voicePlay(text)
+          }
+        } // LETTER V
+        else if (rExtended) {
+          var xdistZ = lf[0].metacarpal[0] - rf[2].tipPosition[0];
+          var ydistZ = lf[0].metacarpal[1] - rf[2].tipPosition[1];
+          var zdistZ = lf[0].metacarpal[2] - rf[2].tipPosition[2];
+          var distZ = Math.sqrt( xdistZ*xdistZ + ydistZ*ydistZ + zdistZ*zdistZ );
+          // distance between middle and palm
+          // measuring for distance with letter Z
+
+          var xdistW = lf[4].mcpPosition[0] - rf[4].mcpPosition[0];
+          var ydistW = lf[4].mcpPosition[1] - rf[4].mcpPosition[1];
+          var zdistW = lf[4].mcpPosition[2] - rf[4].mcpPosition[2];
+          var distW = Math.sqrt( xdistW*xdistW + ydistW*ydistW + zdistW*zdistW );
+          // distance between middle and palm
+          // measuring for distance with letter W
+
+
+          if ( distZ < 20 ){
+            frameString += "Z";
+            text = 'Z'
+            voicePlay(text)
+          } // LETTER Z
+          else if ( distW < 20 ){
+            frameString += "W";
+            text = 'W'
+            voicePlay(text)
+          } // LETTER W
+        } // Both hands fully extended closing
+      } // left hand extended closing
 
       else if ( lf[2].extended && lf[3].extended && lf[4].extended && rf[2].extended && rf[3].extended && rf[4].extended){
 
@@ -137,6 +207,20 @@ $( document ).ready(function() {
           voicePlay(text)
         }
       } //LETTER B
+      else if (lf[1].extended && rf[1].extended) {
+        var xdist = lf[1].pipPosition[0] - rf[1].pipPosition[0];
+        var ydist = lf[1].pipPosition[1] - rf[1].pipPosition[1];
+        var zdist = lf[1].pipPosition[2] - rf[1].pipPosition[2];
+        var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
+        // distance between the mid point of both index fingers, crossed over
+        // measuring for distance with letter X
+
+        if ( dist < 20 ){
+          frameString += "X";
+          text = 'X'
+          voicePlay(text)
+        } // LETTER X
+      }
 
       else if (
       lf[1].extended && rf[0].extended && rf[1].extended
@@ -158,15 +242,37 @@ $( document ).ready(function() {
           voicePlay(text)
         }
       } //LETTER D
+      else if (!lExtended && !rExtended) {
+
+        var xdistg = lf[1].mcpPosition[0] - rf[4].mcpPosition[0];
+        var ydistg = lf[1].mcpPosition[1] - rf[4].mcpPosition[1];
+        var zdistg = lf[1].mcpPosition[2] - rf[4].mcpPosition[2];
+        var Distg = Math.sqrt( xdistg*xdistg + ydistg*ydistg + zdistg*zdistg );
+
+        var xdists = lf[4].mcpPosition[0] - rf[4].mcpPosition[0];
+        var ydists = lf[4].mcpPosition[1] - rf[4].mcpPosition[1];
+        var zdists = lf[4].mcpPosition[2] - rf[4].mcpPosition[2];
+        var Dists = Math.sqrt( xdists*xdists + ydists*ydists + zdists*zdists );
+
+
+        if ( Distg < 20 ){
+          frameString += "G";
+          text = 'G'
+          voicePlay(text)
+        } //LETTER G
+        else if (Dists < 20) {
+          frameString += "S";
+          text = 'S'
+          voicePlay(text)
+        } // LETTER S
+      }
     }//Close both hands visible if statement
     else if ((l && !r) || (!l && r)){
       var hand = frame.hands[0];
 
-      if ( hand.fingers[2].extended && !hand.fingers[0].extended && !hand.fingers[1].extended && !hand.fingers[3].extended && !hand.fingers[4].extended) /*If someone flipped the bird*/{
+      if ( hand.fingers[2].extended && !hand.fingers[0].extended && !hand.fingers[1].extended && !hand.fingers[3].extended && !hand.fingers[4].extended){
           $("#celine").attr("src", $("#celine").attr("src").replace("autoplay=0", "autoplay=1"));
-
-      }
-
+      }  //If someone flipped the bird
       else if (hand.fingers[0].extended && hand.fingers[1].extended && !hand.fingers[2].extended && !hand.fingers[3].extended && !hand.fingers[4].extended) {
 
         var xdist = hand.fingers[0].tipPosition[0] - hand.fingers[1].tipPosition[0];
@@ -179,7 +285,7 @@ $( document ).ready(function() {
             text = 'C'
             voicePlay(text)
           }
-      } //LETTER C
+        } //LETTER C
 
       // else if (hand.fingers[0].extended && hand.fingers[1].extended && hand.fingers[2].extended && hand.fingers[3].extended && hand.fingers[4].extended
       // ) {
