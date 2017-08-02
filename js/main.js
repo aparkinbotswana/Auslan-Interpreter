@@ -15,8 +15,6 @@ $( document ).ready(function() {
   var l = null;
   var r = null;
 
-
-
   // Leap.loop(function(frame){
   var processFrame = function(frame){
 
@@ -323,7 +321,7 @@ $( document ).ready(function() {
     window.camera = null;
 
     initScene = function(element) {
-      var axis, pointLight;
+      var pointLight;
       window.scene = new THREE.Scene();
       window.renderer = new THREE.WebGLRenderer({
         alpha: true
@@ -334,8 +332,6 @@ $( document ).ready(function() {
       renderer.setClearColor(0x2F394D, 1);
       renderer.setSize(window.innerWidth, window.innerHeight);
       element.appendChild(renderer.domElement);
-      axis = new THREE.AxisHelper(40);
-      scene.add(axis);
       scene.add(new THREE.AmbientLight(0x888888));
       pointLight = new THREE.PointLight(0xFFffff);
       pointLight.position = new THREE.Vector3(-20, 10, 0);
