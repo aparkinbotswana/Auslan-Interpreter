@@ -64,62 +64,59 @@ $( document ).ready(function() {
   // console.log(tDist);
 
       if (lExtended) {
+
         if (rf[1].extended && !rf[0].extended && !rf[2].extended && !rf[3].extended && !rf[4].extended) {
 
-          var xdist = lf[0].tipPosition[0] - rf[1].tipPosition[0];
-          var ydist = lf[0].tipPosition[1] - rf[1].tipPosition[1];
-          var zdist = lf[0].tipPosition[2] - rf[1].tipPosition[2];
-          var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
+          var xdistA = lf[0].tipPosition[0] - rf[1].tipPosition[0];
+          var ydistA = lf[0].tipPosition[1] - rf[1].tipPosition[1];
+          var zdistA = lf[0].tipPosition[2] - rf[1].tipPosition[2];
+          var distA = Math.sqrt( xdistA*xdistA + ydistA*ydistA + zdistA*zdistA );
+          // distance between index and thumb
+          // measuring for distance with letter A
 
-          if ( dist < 20 ){
-            frameString += 'YOU MADE THE LETTER "A" MOUTHFUCKER' + dist + '<br>';
+          var xdistI = lf[2].tipPosition[0] - rf[1].tipPosition[0];
+          var ydistI = lf[2].tipPosition[1] - rf[1].tipPosition[1];
+          var zdistI = lf[2].tipPosition[2] - rf[1].tipPosition[2];
+          var distI = Math.sqrt( xdistI*xdistI + ydistI*ydistI + zdistI*zdistI );
+          // distance between index and middle finger
+          // measuring for distance with letter I
+
+          var xdistO = lf[3].tipPosition[0] - rf[1].tipPosition[0];
+          var ydistO = lf[3].tipPosition[1] - rf[1].tipPosition[1];
+          var zdistO = lf[3].tipPosition[2] - rf[1].tipPosition[2];
+          var distO = Math.sqrt( xdistO*xdistO + ydistO*ydistO + zdistO*zdistO );
+          // distance between index and ring finger
+          // measuring for distance with letter O
+
+          var xdistU = lf[4].tipPosition[0] - rf[1].tipPosition[0];
+          var ydistU = lf[4].tipPosition[1] - rf[1].tipPosition[1];
+          var zdistU = lf[4].tipPosition[2] - rf[1].tipPosition[2];
+          var distU = Math.sqrt( xdistU*xdistU + ydistU*ydistU + zdistU*zdistU );
+          // distance between index and pinky finger
+          // measuring for distance with letter U
+
+          if ( distA < 20 ){
+            frameString += "A";
             text = 'A'
             voicePlay(text)
-          }
-        } //LETTER A
-
-        else if (rf[1].extended) {
-          var xdist = lf[2].tipPosition[0] - rf[1].tipPosition[0];
-          var ydist = lf[2].tipPosition[1] - rf[1].tipPosition[1];
-          var zdist = lf[2].tipPosition[2] - rf[1].tipPosition[2];
-          var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
-  console.log('i');
-          if ( dist < 20 ){
-            console.log('i here');
-            frameString += 'YOU MADE THE LETTER "I" MOUTHFUCKER' + dist + '<br>';
+          } // LETTER A
+          else if ( distI < 20 ){
+            frameString += "I";
             text = 'I'
             voicePlay(text)
-          }
-        } //LETTER I
-
-        else if (rf[1].extended){
-
-          var xdist = lf[3].tipPosition[0] - rf[1].tipPosition[0];
-          var ydist = lf[3].tipPosition[1] - rf[1].tipPosition[1];
-          var zdist = lf[3].tipPosition[2] - rf[1].tipPosition[2];
-          var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
-  console.log('o');
-          if ( dist < 20 ){
-            frameString += 'YOU MADE THE LETTER "O" MOUTHFUCKER' + dist + '<br>';
+          } // LETTER I
+          else if ( distO < 20 ){
+            frameString += "O";
             text = 'O'
             voicePlay(text)
-          }
-        } //LETTER O
-
-        else if (rf[1].extended){
-
-          var xdist = lf[4].tipPosition[0] - rf[1].tipPosition[0];
-          var ydist = lf[4].tipPosition[1] - rf[1].tipPosition[1];
-          var zdist = lf[4].tipPosition[2] - rf[1].tipPosition[2];
-          var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
-  console.log('u');
-          if ( dist < 20 ){
-            frameString += 'YOU MADE THE LETTER "U" MOUTHFUCKER' + dist + '<br>';
+          } // LETTER O
+          else if ( distU < 20 ){
+            frameString += "U";
             text = 'U'
             voicePlay(text)
-          }
-        } //LETTER U
-      }
+          } // LETTER U
+        } // A I O U closing
+      } // All extended closing
 
       else if ( lf[2].extended && lf[3].extended && lf[4].extended && rf[2].extended && rf[3].extended && rf[4].extended){
 
@@ -135,7 +132,7 @@ $( document ).ready(function() {
 
 
         if ( lDist < 20 && rDist < 20 ){
-          frameString += 'YOU MADE THE LETTER "B" MOUTHFUCKER' + dist + '<br>';
+          frameString += "B";
           text = 'B'
           voicePlay(text)
         }
@@ -156,7 +153,7 @@ $( document ).ready(function() {
 
 
         if ( iDist < 20 && tDist < 50 && tDist > 15 ){
-          frameString += 'YOU MADE THE LETTER "D" MOUTHFUCKER' + dist + '<br>';
+          frameString += "D";
           text = 'D'
           voicePlay(text)
         }
@@ -169,6 +166,7 @@ $( document ).ready(function() {
           $("#celine").attr("src", $("#celine").attr("src").replace("autoplay=0", "autoplay=1"));
 
       }
+
       else if (hand.fingers[0].extended && hand.fingers[1].extended && !hand.fingers[2].extended && !hand.fingers[3].extended && !hand.fingers[4].extended) {
 
         var xdist = hand.fingers[0].tipPosition[0] - hand.fingers[1].tipPosition[0];
@@ -177,11 +175,12 @@ $( document ).ready(function() {
         var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
 
           if ( dist > 70 && dist < 105 ){
-            frameString += 'YOU MADE THE LETTER "C" MOUTHFUCKER' + dist + '<br>';
+            frameString += "C";
             text = 'C'
             voicePlay(text)
           }
       } //LETTER C
+
       // else if (hand.fingers[0].extended && hand.fingers[1].extended && hand.fingers[2].extended && hand.fingers[3].extended && hand.fingers[4].extended
       // ) {
       //   $("#oh-hi-mark").attr("src", $("#oh-hi-mark").attr("src").replace("autoplay=0", "autoplay=1&start=6"));
@@ -198,8 +197,11 @@ $( document ).ready(function() {
     output.innerHTML = frameString;
   };
 
-
-    // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  // following code to render hands
   function getParam(name) {
       name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
       var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -258,16 +260,6 @@ $( document ).ready(function() {
       console.log('webgl init');
       initScene(document.getElementById('hands'));
     }
-    //
-    // stats = new Stats();
-    //
-    // stats.domElement.style.position = 'absolute';
-    //
-    // stats.domElement.style.left = '0px';
-    //
-    // stats.domElement.style.top = '0px';
-    //
-    // document.body.appendChild(stats.domElement);
 
     window.controller = controller = new Leap.Controller;
 
@@ -361,11 +353,5 @@ $( document ).ready(function() {
         render: function() {}
       });
     }
-
-
-
 //////////////////////////////////////////////////////////////////////////////
-
-
-   //close Leap.Loop
 }); //close document ready
