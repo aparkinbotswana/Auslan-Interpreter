@@ -10,21 +10,35 @@
   src="https://code.jquery.com/jquery-3.2.1.js"
   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
   crossorigin="anonymous"></script>
+  <script src="js/three.min.js"></script>
+  <script src="js/TrackballControls.js"></script>
   <script src="https://js.leapmotion.com/leap-0.6.4.js"></script>
+  <script src="js/leap-plugins-0.1.10.js"></script>
+  <script src="js/leap.transform.js"></script>
+  <script src="js/leap.rigged-hand-0.1.4.js"></script>
+
   <script src="js/main.js" charset="utf-8"></script>
+  <link href="https://fonts.googleapis.com/css?family=Alegreya+SC|Lancelot|Marcellus+SC|Open+Sans:300|Poiret+One|Cinzel" rel="stylesheet">
+
 
   <link rel="stylesheet" href="css/style.css">
   <title>Auslan Interpreter</title>
 </head>
 <body>
 
+  <div id="hands">
+  </div>
+
+  <div>
+    <p id='heading'>Auslan Interpreter</p>
+  </div>
 
   <div id='output'>
-
+    <p>A</p>
   </div>
 
   <iframe id='oh-hi-mark' width="560" height="315" src="https://www.youtube.com/embed/zLhoDB-ORLQ?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
-  <iframe id='celine' width="560" height="315" src="https://www.youtube.com/embed/ZqVEVoguhYg?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
+  <iframe id='celine' width="560" height="315" src="https://www.youtube.com/embed/X2WH8mHJnhM?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
 
 </body>
 </html>
