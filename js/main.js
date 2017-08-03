@@ -104,9 +104,9 @@ $( document ).ready(function() {
           // distance between index and pinky finger
           // measuring for distance with letter U
 
-          var xdistY = lf[0].mcpPosition[0] - rf[1].tipPosition[0];
-          var ydistY = lf[0].mcpPosition[1] - rf[1].tipPosition[1];
-          var zdistY = lf[0].mcpPosition[2] - rf[1].tipPosition[2];
+          var xdistY = lf[0].pipPosition[0] - rf[1].tipPosition[0];
+          var ydistY = lf[0].pipPosition[1] - rf[1].tipPosition[1];
+          var zdistY = lf[0].pipPosition[2] - rf[1].tipPosition[2];
           var distY = Math.sqrt( xdistY*xdistY + ydistY*ydistY + zdistY*zdistY );
           // distance between index and base of thumb
           // measuring for distance with letter Y
@@ -158,22 +158,22 @@ $( document ).ready(function() {
           }
         } // LETTER V
         else if (rExtended) {
-          var xdistZ = lf[0].metacarpal[0] - rf[2].tipPosition[0];
-          var ydistZ = lf[0].metacarpal[1] - rf[2].tipPosition[1];
-          var zdistZ = lf[0].metacarpal[2] - rf[2].tipPosition[2];
+          var xdistZ = lf[2].mcpPosition[0] - rf[2].tipPosition[0];
+          var ydistZ = lf[2].mcpPosition[1] - rf[2].tipPosition[1];
+          var zdistZ = lf[2].mcpPosition[2] - rf[2].tipPosition[2];
           var distZ = Math.sqrt( xdistZ*xdistZ + ydistZ*ydistZ + zdistZ*zdistZ );
           // distance between middle and palm
           // measuring for distance with letter Z
 
-          var xdistW = lf[4].mcpPosition[0] - rf[4].mcpPosition[0];
-          var ydistW = lf[4].mcpPosition[1] - rf[4].mcpPosition[1];
-          var zdistW = lf[4].mcpPosition[2] - rf[4].mcpPosition[2];
+          var xdistW = lf[1].mcpPosition[0] - rf[1].mcpPosition[0];
+          var ydistW = lf[1].mcpPosition[1] - rf[1].mcpPosition[1];
+          var zdistW = lf[1].mcpPosition[2] - rf[1].mcpPosition[2];
           var distW = Math.sqrt( xdistW*xdistW + ydistW*ydistW + zdistW*zdistW );
           // distance between middle and palm
           // measuring for distance with letter W
 
 
-          if ( distZ < 20 ){
+          if ( distZ < 50 ){
             frameString += "Z";
             text = 'Z'
             voicePlay(text)
@@ -198,8 +198,14 @@ $( document ).ready(function() {
         var zdistR = rf[0].tipPosition[2] - rf[1].tipPosition[2];
         var rDist = Math.sqrt( xdistR*xdistR + ydistR*ydistR + zdistR*zdistR );
 
+        var xdistThumb = rf[0].tipPosition[0] - lf[0].tipPosition[0];
+        var ydistThumb = rf[0].tipPosition[1] - lf[0].tipPosition[1];
+        var zdistThumb = rf[0].tipPosition[2] - lf[0].tipPosition[2];
+        var thumbDist = Math.sqrt( xdistThumb*xdistThumb + ydistThumb*ydistThumb + zdistThumb*zdistThumb );
 
-        if ( lDist < 20 && rDist < 20 ){
+
+
+        if ( lDist < 20 && rDist < 20 && thumbDist < 20  ){
           frameString += "B";
           text = 'B'
           voicePlay(text)
@@ -321,7 +327,7 @@ $( document ).ready(function() {
     window.camera = null;
 
     initScene = function(element) {
-      var pointLight;
+      var axis, pointLight;
       window.scene = new THREE.Scene();
       window.renderer = new THREE.WebGLRenderer({
         alpha: true
@@ -332,14 +338,16 @@ $( document ).ready(function() {
       renderer.setClearColor(0x2F394D, 1);
       renderer.setSize(window.innerWidth, window.innerHeight);
       element.appendChild(renderer.domElement);
+      // axis = new THREE.AxisHelper(40);
+      // scene.add(axis);
       scene.add(new THREE.AmbientLight(0x888888));
       pointLight = new THREE.PointLight(0xFFffff);
       pointLight.position = new THREE.Vector3(-20, 10, 0);
-      pointLight.lookAt(new THREE.Vector3(0, 0, 0));
+      pointLight.lookAt(new THREE.Vector3(50, 0, 0));
       scene.add(pointLight);
       window.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-      var x = -30;
-      var y = 15;
+      var x = 0;
+      var y = 50;
       var z = 20;
       camera.position.set(x, y, z);
       camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -373,7 +381,7 @@ $( document ).ready(function() {
       scale: getParam('scale'),
       positionScale: getParam('positionScale'),
       helper: true,
-      offset: new THREE.Vector3(0, 0, 0),
+      offset: new THREE.Vector3(0, 10, 10),
       renderFn: function() {
         renderer.render(scene, camera);
         return controls.update();
