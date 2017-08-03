@@ -9,7 +9,7 @@ $( document ).ready(function() {
   }  //close voicePlay function - converts string to audible speech
 
   var output = document.getElementById('output');
-  var frameString = "", handString = "", fingerString = "";
+  var frameString = "";
   var hand, finger;
 
   var l = null;
@@ -44,17 +44,6 @@ $( document ).ready(function() {
       r = null;
     }
 
-// if (lf[1].extended && rf[1].extended) {
-//
-// var xdist = lf[1].tipPosition[0] - rf[1].tipPosition[0];
-// var ydist = lf[1].tipPosition[1] - rf[1].tipPosition[1];
-// var zdist = lf[1].tipPosition[2] - rf[1].tipPosition[2];
-// var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
-//
-// frameString = 'INDEX EXTEND TEST! ' + dist;
-//
-// }
-
     if(l && r){ // both l & r visible
       var lf = l.fingers;
       var rf = r.fingers;
@@ -64,7 +53,6 @@ $( document ).ready(function() {
       if (lExtended) {
 
         if (rf[1].extended && !rf[0].extended && !rf[2].extended && !rf[3].extended && !rf[4].extended) {
-
           var xdistA = lf[0].tipPosition[0] - rf[1].tipPosition[0];
           var ydistA = lf[0].tipPosition[1] - rf[1].tipPosition[1];
           var zdistA = lf[0].tipPosition[2] - rf[1].tipPosition[2];
@@ -208,7 +196,6 @@ $( document ).ready(function() {
       } // left hand extended closing
 
       else if ( lf[2].extended && lf[3].extended && lf[4].extended && rf[2].extended && rf[3].extended && rf[4].extended){
-
         var xdistL = lf[0].tipPosition[0] - lf[1].tipPosition[0];
         var ydistL = lf[0].tipPosition[1] - lf[1].tipPosition[1];
         var zdistL = lf[0].tipPosition[2] - lf[1].tipPosition[2];
@@ -231,6 +218,27 @@ $( document ).ready(function() {
           voicePlay(text)
         }
       } //LETTER B
+      else if (lf[4].extended && lf[3].extended && lf[2].extended && rf[1].extended) {
+        var xdistLeft = lf[0].tipPosition[0] - lf[1].tipPosition[0];
+        var ydistLeft = lf[0].tipPosition[1] - lf[1].tipPosition[1];
+        var zdistLeft = lf[0].tipPosition[2] - lf[1].tipPosition[2];
+        var distLeft = Math.sqrt( xdistLeft*xdistLeft + ydistLeft*ydistLeft + zdistLeft*zdistLeft );
+        // distance between left thumb and left index
+        // measuring for distance with letter Q
+
+        var xdistRight = lf[0].pipPosition[0] - rf[1].tipPosition[0];
+        var ydistRight = lf[0].pipPosition[1] - rf[1].tipPosition[1];
+        var zdistRight = lf[0].pipPosition[2] - rf[1].tipPosition[2];
+        var distRight = Math.sqrt( xdistRight*xdistRight + ydistRight*ydistRight + zdistRight*zdistRight );
+        // distance between tip of right index and base of left thumb
+        // measuring for distance with letter Q
+
+        if ( distLeft < 30 && distRight < 30 ){
+          frameString = "Q";
+          text = 'Q'
+          voicePlay(text)
+        } // LETTER Q
+      }
       else if (lf[1].extended && rf[1].extended) {
         var xdist = lf[1].pipPosition[0] - rf[1].pipPosition[0];
         var ydist = lf[1].pipPosition[1] - rf[1].pipPosition[1];
@@ -294,11 +302,13 @@ $( document ).ready(function() {
         var ydistg = lf[1].mcpPosition[1] - rf[4].mcpPosition[1];
         var zdistg = lf[1].mcpPosition[2] - rf[4].mcpPosition[2];
         var Distg = Math.sqrt( xdistg*xdistg + ydistg*ydistg + zdistg*zdistg );
+        // measuring distance for Letter G
 
-        var xdists = lf[4].mcpPosition[0] - rf[4].mcpPosition[0];
-        var ydists = lf[4].mcpPosition[1] - rf[4].mcpPosition[1];
-        var zdists = lf[4].mcpPosition[2] - rf[4].mcpPosition[2];
+        var xdists = lf[4].tipPosition[0] - rf[4].mcpPosition[0];
+        var ydists = lf[4].tipPosition[1] - rf[4].mcpPosition[1];
+        var zdists = lf[4].tipPosition[2] - rf[4].mcpPosition[2];
         var Dists = Math.sqrt( xdists*xdists + ydists*ydists + zdists*zdists );
+        // measuring distance for Letter S
 
 
         if ( Distg < 20 ){
