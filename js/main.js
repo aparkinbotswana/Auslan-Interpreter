@@ -113,27 +113,27 @@ $( document ).ready(function() {
 
 
           if ( distA < 20 ){
-            frameString += "A";
+            frameString = "A";
             text = 'A'
             voicePlay(text)
           } // LETTER A
           else if ( distI < 20 ){
-            frameString += "I";
+            frameString = "I";
             text = 'I'
             voicePlay(text)
           } // LETTER I
           else if ( distO < 20 ){
-            frameString += "O";
+            frameString = "O";
             text = 'O'
             voicePlay(text)
           } // LETTER O
           else if ( distU < 20 ){
-            frameString += "U";
+            frameString = "U";
             text = 'U'
             voicePlay(text)
           } // LETTER U
           else if (distY < 20) {
-            frameString += "Y";
+            frameString = "Y";
             text = 'Y'
             voicePlay(text)
           } // LETTER Y
@@ -152,7 +152,7 @@ $( document ).ready(function() {
           // distance between tip of index finger right hand and wrist left hand
 
           if ( distBase < 20 && distWrist < 20 ){
-            frameString += "V";
+            frameString = "V";
             text = 'V'
             voicePlay(text)
           }
@@ -174,12 +174,12 @@ $( document ).ready(function() {
 
 
           if ( distZ < 50 ){
-            frameString += "Z";
+            frameString = "Z";
             text = 'Z'
             voicePlay(text)
           } // LETTER Z
           else if ( distW < 20 ){
-            frameString += "W";
+            frameString = "W";
             text = 'W'
             voicePlay(text)
           } // LETTER W
@@ -206,7 +206,7 @@ $( document ).ready(function() {
 
 
         if ( lDist < 20 && rDist < 20 && thumbDist < 20  ){
-          frameString += "B";
+          frameString = "B";
           text = 'B'
           voicePlay(text)
         }
@@ -220,7 +220,7 @@ $( document ).ready(function() {
         // measuring for distance with letter X
 
         if ( dist < 20 ){
-          frameString += "X";
+          frameString = "X";
           text = 'X'
           voicePlay(text)
         } // LETTER X
@@ -241,7 +241,7 @@ $( document ).ready(function() {
 
 
         if ( iDist < 20 && tDist < 50 && tDist > 15 ){
-          frameString += "D";
+          frameString = "D";
           text = 'D'
           voicePlay(text)
         }
@@ -260,12 +260,12 @@ $( document ).ready(function() {
 
 
         if ( Distg < 20 ){
-          frameString += "G";
+          frameString = "G";
           text = 'G'
           voicePlay(text)
         } //LETTER G
         else if (Dists < 20) {
-          frameString += "S";
+          frameString = "S";
           text = 'S'
           voicePlay(text)
         } // LETTER S
@@ -285,7 +285,7 @@ $( document ).ready(function() {
         var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
 
           if ( dist > 70 && dist < 105 ){
-            frameString += "C";
+            frameString = "C";
             text = 'C'
             voicePlay(text)
           }
@@ -299,8 +299,8 @@ $( document ).ready(function() {
 
     for (var i = 0; i < frame.hands.length; i++) {
 
-      frameString += handString;
-      frameString += fingerString;
+      // frameString += handString;
+      // frameString += fingerString;
 
     } //close frame.hands.length loop
 
@@ -381,7 +381,7 @@ $( document ).ready(function() {
       scale: getParam('scale'),
       positionScale: getParam('positionScale'),
       helper: true,
-      offset: new THREE.Vector3(0, 10, 10),
+      offset: new THREE.Vector3(0, 10, 12),
       renderFn: function() {
         renderer.render(scene, camera);
         return controls.update();
