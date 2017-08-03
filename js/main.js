@@ -158,9 +158,9 @@ $( document ).ready(function() {
           }
         } // LETTER V
         else if (rExtended) {
-          var xdistZ = lf[2].mcpPosition[0] - rf[2].tipPosition[0];
-          var ydistZ = lf[2].mcpPosition[1] - rf[2].tipPosition[1];
-          var zdistZ = lf[2].mcpPosition[2] - rf[2].tipPosition[2];
+          var xdistZ = lf[2].carpPosition[0] - rf[2].tipPosition[0];
+          var ydistZ = lf[2].carpPosition[1] - rf[2].tipPosition[1];
+          var zdistZ = lf[2].carpPosition[2] - rf[2].tipPosition[2];
           var distZ = Math.sqrt( xdistZ*xdistZ + ydistZ*ydistZ + zdistZ*zdistZ );
           // distance between middle and palm
           // measuring for distance with letter Z
@@ -169,6 +169,20 @@ $( document ).ready(function() {
           var ydistW = lf[1].mcpPosition[1] - rf[1].mcpPosition[1];
           var zdistW = lf[1].mcpPosition[2] - rf[1].mcpPosition[2];
           var distW = Math.sqrt( xdistW*xdistW + ydistW*ydistW + zdistW*zdistW );
+          // distance between middle and palm
+          // measuring for distance with letter W
+
+          var xdistThumbH = lf[0].pipPosition[0] - rf[4].tipPosition[0];
+          var ydistThumbH = lf[0].pipPosition[1] - rf[4].tipPosition[1];
+          var zdistThumbH = lf[0].pipPosition[2] - rf[4].tipPosition[2];
+          var distThumbH = Math.sqrt( xdistThumbH*xdistThumbH + ydistThumbH*ydistThumbH + zdistThumbH*zdistThumbH );
+          // distance between middle and palm
+          // measuring for distance with letter W
+
+          var xdistIndexH = lf[1].tipPosition[0] - rf[4].tipPosition[0];
+          var ydistIndexH = lf[1].tipPosition[1] - rf[4].tipPosition[1];
+          var zdistIndexH = lf[1].tipPosition[2] - rf[4].tipPosition[2];
+          var distIndexH = Math.sqrt( xdistIndexH*xdistIndexH + ydistIndexH*ydistIndexH + zdistIndexH*zdistIndexH );
           // distance between middle and palm
           // measuring for distance with letter W
 
@@ -182,6 +196,14 @@ $( document ).ready(function() {
             text = 'W'
             voicePlay(text)
           } // LETTER W
+          else if ( distThumbH < 20 ){
+            console.log('log');
+            if (distIndexH) {
+              frameString = "H";
+              text = 'H'
+              voicePlay(text)
+            }
+          } // LETTER H
         } // Both hands fully extended closing
       } // left hand extended closing
 
