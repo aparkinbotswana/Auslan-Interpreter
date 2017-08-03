@@ -17,12 +17,7 @@ $( document ).ready(function() {
 
   // Leap.loop(function(frame){
   var processFrame = function(frame){
-
-    // var crossProduct = Leap.vec3.create();
-    // var direction = hand.direction;
-    // var normal = hand.palmNormal;
-    //
-    // Leap.vec3.cross(crossProduct, direction, normal);
+    //following code sets left and right hands in variable instead of trying to access them from array.
 
     if( frame.hands.length > 1 ){
 
@@ -56,7 +51,7 @@ $( document ).ready(function() {
 // var zdist = lf[1].tipPosition[2] - rf[1].tipPosition[2];
 // var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
 //
-// frameString += 'INDEX EXTEND TEST! ' + dist;
+// frameString = 'INDEX EXTEND TEST! ' + dist;
 //
 // }
 
@@ -65,12 +60,6 @@ $( document ).ready(function() {
       var rf = r.fingers;
       var lExtended = lf[0].extended && lf[1].extended && lf[2].extended && lf[3].extended && lf[4].extended
       var rExtended = rf[0].extended && rf[1].extended && rf[2].extended && rf[3].extended && rf[4].extended
-
-  //       var xdistT = lf[1].mcpPosition[0] - rf[0].tipPosition[0];
-  //       var ydistT = lf[1].mcpPosition[1] - rf[0].tipPosition[1];
-  //       var zdistT = lf[1].mcpPosition[2] - rf[0].tipPosition[2];
-  //       var tDist = Math.sqrt( xdistT*xdistT + ydistT*ydistT + zdistT*zdistT );
-  // console.log(tDist);
 
       if (lExtended) {
 
@@ -111,12 +100,23 @@ $( document ).ready(function() {
           // distance between index and base of thumb
           // measuring for distance with letter Y
 
+          var xdistE = lf[1].tipPosition[0] - rf[1].tipPosition[0];
+          var ydistE = lf[1].tipPosition[1] - rf[1].tipPosition[1];
+          var zdistE = lf[1].tipPosition[2] - rf[1].tipPosition[2];
+          var distE = Math.sqrt( xdistE*xdistE + ydistE*ydistE + zdistE*zdistE );
+          // distance between index tip of left hand and index tip of right hand
+          // measuring for distance with letter E
 
           if ( distA < 20 ){
             frameString = "A";
             text = 'A'
             voicePlay(text)
           } // LETTER A
+          else if ( distE < 20 ){
+            frameString = "E";
+            text = 'E'
+            voicePlay(text)
+          } // LETTER E
           else if ( distI < 20 ){
             frameString = "I";
             text = 'I'
@@ -172,7 +172,6 @@ $( document ).ready(function() {
           // distance between middle and palm
           // measuring for distance with letter W
 
-
           if ( distZ < 50 ){
             frameString = "Z";
             text = 'Z'
@@ -204,7 +203,6 @@ $( document ).ready(function() {
         var thumbDist = Math.sqrt( xdistThumb*xdistThumb + ydistThumb*ydistThumb + zdistThumb*zdistThumb );
 
 
-
         if ( lDist < 20 && rDist < 20 && thumbDist < 20  ){
           frameString = "B";
           text = 'B'
@@ -225,7 +223,26 @@ $( document ).ready(function() {
           voicePlay(text)
         } // LETTER X
       }
+      else if (lf[1].extended) {
+        var xdistLeft = lf[1].tipPosition[0] - rf[1].tipPosition[0];
+        var ydistLeft = lf[1].tipPosition[1] - rf[1].tipPosition[1];
+        var zdistLeft = lf[1].tipPosition[2] - rf[1].tipPosition[2];
+        var distLeft = Math.sqrt( xdistLeft*xdistLeft + ydistLeft*ydistLeft + zdistLeft*zdistLeft );
+        //left index to right index
+        // measuring for distance with letter P
 
+        var xdistRight = rf[0].tipPosition[0] - rf[1].tipPosition[0];
+        var ydistRight = rf[0].tipPosition[1] - rf[1].tipPosition[1];
+        var zdistRight = rf[0].tipPosition[2] - rf[1].tipPosition[2];
+        var distRight = Math.sqrt( xdistRight*xdistRight + ydistRight*ydistRight + zdistRight*zdistRight );
+        // right index to right thumb
+
+        if ( distLeft < 20 && distRight < 20 ){
+          frameString = "P";
+          text = 'P'
+          voicePlay(text)
+        } // LETTER P
+      }
       else if (
       lf[1].extended && rf[0].extended && rf[1].extended
       ){
@@ -246,6 +263,9 @@ $( document ).ready(function() {
           voicePlay(text)
         }
       } //LETTER D
+      else if (lf[1].extended && rf[2].extended && rf[3].extended && rf[4].extended) {
+
+      }
       else if (!lExtended && !rExtended) {
 
         var xdistg = lf[1].mcpPosition[0] - rf[4].mcpPosition[0];
@@ -274,10 +294,7 @@ $( document ).ready(function() {
     else if ((l && !r) || (!l && r)){
       var hand = frame.hands[0];
 
-      if ( hand.fingers[2].extended && !hand.fingers[0].extended && !hand.fingers[1].extended && !hand.fingers[3].extended && !hand.fingers[4].extended){
-          $("#celine").attr("src", $("#celine").attr("src").replace("autoplay=0", "autoplay=1"));
-      }  //If someone flipped the bird
-      else if (hand.fingers[0].extended && hand.fingers[1].extended && !hand.fingers[2].extended && !hand.fingers[3].extended && !hand.fingers[4].extended) {
+      if (hand.fingers[0].extended && hand.fingers[1].extended && !hand.fingers[2].extended && !hand.fingers[3].extended && !hand.fingers[4].extended) {
 
         var xdist = hand.fingers[0].tipPosition[0] - hand.fingers[1].tipPosition[0];
         var ydist = hand.fingers[0].tipPosition[1] - hand.fingers[1].tipPosition[1];
@@ -290,20 +307,14 @@ $( document ).ready(function() {
             voicePlay(text)
           }
         } //LETTER C
-
+      // else if ( hand.fingers[2].extended && !hand.fingers[0].extended && !hand.fingers[1].extended && !hand.fingers[3].extended && !hand.fingers[4].extended){
+      //     $("#celine").attr("src", $("#celine").attr("src").replace("autoplay=0", "autoplay=1"));
+      // }  //If someone flipped the bird
       // else if (hand.fingers[0].extended && hand.fingers[1].extended && hand.fingers[2].extended && hand.fingers[3].extended && hand.fingers[4].extended
       // ) {
       //   $("#oh-hi-mark").attr("src", $("#oh-hi-mark").attr("src").replace("autoplay=0", "autoplay=1&start=6"));
       // } //HELLO
     } //Close single hand only if statement
-
-    for (var i = 0; i < frame.hands.length; i++) {
-
-      // frameString += handString;
-      // frameString += fingerString;
-
-    } //close frame.hands.length loop
-
     output.innerHTML = frameString;
   };
 
