@@ -165,7 +165,7 @@ $( document ).ready(function() {
           var zdistThumbH = lf[0].pipPosition[2] - rf[4].tipPosition[2];
           var distThumbH = Math.sqrt( xdistThumbH*xdistThumbH + ydistThumbH*ydistThumbH + zdistThumbH*zdistThumbH );
           // distance between middle and palm
-          // measuring for distance with letter W
+          // measuring for distance with letter H
 
           var xdistIndexH = lf[1].tipPosition[0] - rf[4].tipPosition[0];
           var ydistIndexH = lf[1].tipPosition[1] - rf[4].tipPosition[1];
@@ -333,19 +333,12 @@ $( document ).ready(function() {
         var zdist = hand.fingers[0].tipPosition[2] - hand.fingers[1].tipPosition[2];
         var dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist );
 
-          if ( dist > 70 && dist < 105 ){
+        if ( dist > 70 && dist < 105 ){
             frameString = "C";
             text = 'C'
             voicePlay(text)
-          }
-        } //LETTER C
-      // else if ( hand.fingers[2].extended && !hand.fingers[0].extended && !hand.fingers[1].extended && !hand.fingers[3].extended && !hand.fingers[4].extended){
-      //     $("#celine").attr("src", $("#celine").attr("src").replace("autoplay=0", "autoplay=1"));
-      // }  //If someone flipped the bird
-      // else if (hand.fingers[0].extended && hand.fingers[1].extended && hand.fingers[2].extended && hand.fingers[3].extended && hand.fingers[4].extended
-      // ) {
-      //   $("#oh-hi-mark").attr("src", $("#oh-hi-mark").attr("src").replace("autoplay=0", "autoplay=1&start=6"));
-      // } //HELLO
+        }
+      } //LETTER C
     } //Close single hand only if statement
     output.innerHTML = frameString;
   };
