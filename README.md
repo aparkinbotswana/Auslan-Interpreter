@@ -4,7 +4,7 @@ The purpose of this program is to help bridge the communication gap between thos
 
 My live, [Auslan Interpreter](https://aparkinbotswana.github.io/Auslan-Interpreter/) can be found here.
 
-![Alt text](images/Auslan Interpreter.png?raw=true "Optional Title")
+![Alt text](images/Auslan Interpreter.png)
 
 
 ## Known Bugs
