@@ -8,6 +8,10 @@ $( document ).ready(function() {
     }  //checks to see if browser supports text to speech
   }  //close voicePlay function - converts string to audible speech
 
+  function fingerDistance(a, b, c, d, e){
+
+  } //this function will replace all tipPosition measurments for purpose of refactoring. arguments to be passed through will be the fingers in the array.
+
   var output = document.getElementById('output');
   var frameString = "";
   var hand, finger;
