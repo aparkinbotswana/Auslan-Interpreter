@@ -8,9 +8,6 @@ $( document ).ready(function() {
     }  //checks to see if browser supports text to speech
   }  //close voicePlay function - converts string to audible speech
 
-  function fingerDistance(a, b, c, d, e){
-
-  } //this function will replace all tipPosition measurments for purpose of refactoring. arguments to be passed through will be the fingers in the array.
 
   var output = document.getElementById('output');
   var frameString = "";
@@ -48,6 +45,16 @@ $( document ).ready(function() {
       r = null;
     }
 
+    function tipPosition(a, b){
+      var xdist = lf[a].tipPosition[0] - rf[b].tipPosition[0];
+      var ydist = lf[a].tipPosition[1] - rf[b].tipPosition[1];
+      var zdist = lf[a].tipPosition[2] - rf[b].tipPosition[2];
+
+      return dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist )
+      // square root defines single number range for measuring distance of fingers. This distance is checked by IF statement to determine when code that renders and speak letter is executed.
+    }
+
+
     if(l && r){ // both l & r visible
       var lf = l.fingers;
       var rf = r.fingers;
@@ -57,11 +64,10 @@ $( document ).ready(function() {
       if (lExtended) {
 
         if (rf[1].extended && !rf[0].extended && !rf[2].extended && !rf[3].extended && !rf[4].extended) {
-          var xdistA = lf[0].tipPosition[0] - rf[1].tipPosition[0];
-          var ydistA = lf[0].tipPosition[1] - rf[1].tipPosition[1];
-          var zdistA = lf[0].tipPosition[2] - rf[1].tipPosition[2];
-          var distA = Math.sqrt( xdistA*xdistA + ydistA*ydistA + zdistA*zdistA );
-          // distance between index and thumb
+          // var xdistA = lf[0].tipPosition[0] - rf[1].tipPosition[0];
+          // var ydistA = lf[0].tipPosition[1] - rf[1].tipPosition[1];
+          // var zdistA = lf[0].tipPosition[2] - rf[1].tipPosition[2];
+          var distA = tipPosition(0, 1)
           // measuring for distance with letter A
 
           var xdistI = lf[2].tipPosition[0] - rf[1].tipPosition[0];
