@@ -64,31 +64,17 @@ $( document ).ready(function() {
       if (lExtended) {
 
         if (rf[1].extended && !rf[0].extended && !rf[2].extended && !rf[3].extended && !rf[4].extended) {
-          // var xdistA = lf[0].tipPosition[0] - rf[1].tipPosition[0];
-          // var ydistA = lf[0].tipPosition[1] - rf[1].tipPosition[1];
-          // var zdistA = lf[0].tipPosition[2] - rf[1].tipPosition[2];
-          var distA = tipPosition(0, 1)
+
+          var distA = tipPosition(0, 1);
           // measuring for distance with letter A
 
-          var xdistI = lf[2].tipPosition[0] - rf[1].tipPosition[0];
-          var ydistI = lf[2].tipPosition[1] - rf[1].tipPosition[1];
-          var zdistI = lf[2].tipPosition[2] - rf[1].tipPosition[2];
-          var distI = Math.sqrt( xdistI*xdistI + ydistI*ydistI + zdistI*zdistI );
-          // distance between index and middle finger
+          var distI = tipPosition(2, 1);
           // measuring for distance with letter I
 
-          var xdistO = lf[3].tipPosition[0] - rf[1].tipPosition[0];
-          var ydistO = lf[3].tipPosition[1] - rf[1].tipPosition[1];
-          var zdistO = lf[3].tipPosition[2] - rf[1].tipPosition[2];
-          var distO = Math.sqrt( xdistO*xdistO + ydistO*ydistO + zdistO*zdistO );
-          // distance between index and ring finger
+          var distO = tipPosition(3, 1);
           // measuring for distance with letter O
 
-          var xdistU = lf[4].tipPosition[0] - rf[1].tipPosition[0];
-          var ydistU = lf[4].tipPosition[1] - rf[1].tipPosition[1];
-          var zdistU = lf[4].tipPosition[2] - rf[1].tipPosition[2];
-          var distU = Math.sqrt( xdistU*xdistU + ydistU*ydistU + zdistU*zdistU );
-          // distance between index and pinky finger
+          var distU = tipPosition(4, 1);
           // measuring for distance with letter U
 
           var xdistY = lf[0].pipPosition[0] - rf[1].tipPosition[0];
@@ -98,11 +84,7 @@ $( document ).ready(function() {
           // distance between index and base of thumb
           // measuring for distance with letter Y
 
-          var xdistE = lf[1].tipPosition[0] - rf[1].tipPosition[0];
-          var ydistE = lf[1].tipPosition[1] - rf[1].tipPosition[1];
-          var zdistE = lf[1].tipPosition[2] - rf[1].tipPosition[2];
-          var distE = Math.sqrt( xdistE*xdistE + ydistE*ydistE + zdistE*zdistE );
-          // distance between index tip of left hand and index tip of right hand
+          var distE = tipPosition(1, 1);
           // measuring for distance with letter E
 
           if ( distA < 20 ){
@@ -226,8 +208,8 @@ $( document ).ready(function() {
           frameString = "B";
           text = 'B'
           voicePlay(text)
-        }
-      } //LETTER B
+        } //LETTER B
+      }
       else if (lf[4].extended && lf[3].extended && lf[2].extended && rf[1].extended) {
         var xdistLeft = lf[0].tipPosition[0] - lf[1].tipPosition[0];
         var ydistLeft = lf[0].tipPosition[1] - lf[1].tipPosition[1];
