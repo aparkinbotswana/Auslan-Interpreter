@@ -45,10 +45,12 @@ $( document ).ready(function() {
       r = null;
     }
 
-    function tipPosition(a, b){
-      var xdist = lf[a].tipPosition[0] - rf[b].tipPosition[0];
-      var ydist = lf[a].tipPosition[1] - rf[b].tipPosition[1];
-      var zdist = lf[a].tipPosition[2] - rf[b].tipPosition[2];
+
+    function tipPosition(finger1, finger2){
+
+      var xdist = lf[finger1].tipPosition[0] - rf[finger2].tipPosition[0];
+      var ydist = lf[finger1].tipPosition[1] - rf[finger2].tipPosition[1];
+      var zdist = lf[finger1].tipPosition[2] - rf[finger2].tipPosition[2];
 
       return dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist )
       // square root defines single number range for measuring distance of fingers. This distance is checked by IF statement to determine when code that renders and speak letter is executed.
@@ -159,10 +161,7 @@ $( document ).ready(function() {
           // distance between middle and palm
           // measuring for distance with letter H
 
-          var xdistIndexH = lf[1].tipPosition[0] - rf[4].tipPosition[0];
-          var ydistIndexH = lf[1].tipPosition[1] - rf[4].tipPosition[1];
-          var zdistIndexH = lf[1].tipPosition[2] - rf[4].tipPosition[2];
-          var distIndexH = Math.sqrt( xdistIndexH*xdistIndexH + ydistIndexH*ydistIndexH + zdistIndexH*zdistIndexH );
+          var distIndexH = tipPosition(1, 4);
           // distance between middle and palm
           // measuring for distance with letter W
 
@@ -198,10 +197,7 @@ $( document ).ready(function() {
         var zdistR = rf[0].tipPosition[2] - rf[1].tipPosition[2];
         var rDist = Math.sqrt( xdistR*xdistR + ydistR*ydistR + zdistR*zdistR );
 
-        var xdistThumb = rf[0].tipPosition[0] - lf[0].tipPosition[0];
-        var ydistThumb = rf[0].tipPosition[1] - lf[0].tipPosition[1];
-        var zdistThumb = rf[0].tipPosition[2] - lf[0].tipPosition[2];
-        var thumbDist = Math.sqrt( xdistThumb*xdistThumb + ydistThumb*ydistThumb + zdistThumb*zdistThumb );
+        var thumbDist = tipPosition(0, 0);
 
 
         if ( lDist < 20 && rDist < 20 && thumbDist < 20  ){
@@ -246,10 +242,7 @@ $( document ).ready(function() {
         } // LETTER X
       }
       else if (lf[1].extended) {
-        var xdistLeft = lf[1].tipPosition[0] - rf[1].tipPosition[0];
-        var ydistLeft = lf[1].tipPosition[1] - rf[1].tipPosition[1];
-        var zdistLeft = lf[1].tipPosition[2] - rf[1].tipPosition[2];
-        var distLeft = Math.sqrt( xdistLeft*xdistLeft + ydistLeft*ydistLeft + zdistLeft*zdistLeft );
+        var distLeft = tipPosition(1, 1);
         //left index to right index
         // measuring for distance with letter P
 
@@ -268,10 +261,7 @@ $( document ).ready(function() {
       else if (
       lf[1].extended && rf[0].extended && rf[1].extended
       ){
-        var xdistI = lf[1].tipPosition[0] - rf[1].tipPosition[0];
-        var ydistI = lf[1].tipPosition[1] - rf[1].tipPosition[1];
-        var zdistI = lf[1].tipPosition[2] - rf[1].tipPosition[2];
-        var iDist = Math.sqrt( xdistI*xdistI + ydistI*ydistI + zdistI*zdistI );
+        var iDist = tipPosition(1, 1);
 
         var xdistT = lf[1].mcpPosition[0] - rf[0].tipPosition[0];
         var ydistT = lf[1].mcpPosition[1] - rf[0].tipPosition[1];
