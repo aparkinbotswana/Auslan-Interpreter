@@ -8,6 +8,7 @@ $( document ).ready(function() {
     }  //checks to see if browser supports text to speech
   }  //close voicePlay function - converts string to audible speech
 
+
   var output = document.getElementById('output');
   var frameString = "";
   var hand, finger;
@@ -44,6 +45,18 @@ $( document ).ready(function() {
       r = null;
     }
 
+
+    function tipPosition(finger1, finger2){
+
+      var xdist = lf[finger1].tipPosition[0] - rf[finger2].tipPosition[0];
+      var ydist = lf[finger1].tipPosition[1] - rf[finger2].tipPosition[1];
+      var zdist = lf[finger1].tipPosition[2] - rf[finger2].tipPosition[2];
+
+      return dist = Math.sqrt( xdist*xdist + ydist*ydist + zdist*zdist )
+      // square root defines single number range for measuring distance of fingers. This distance is checked by IF statement to determine when code that renders and speak letter is executed.
+    }
+
+
     if(l && r){ // both l & r visible
       var lf = l.fingers;
       var rf = r.fingers;
@@ -53,32 +66,17 @@ $( document ).ready(function() {
       if (lExtended) {
 
         if (rf[1].extended && !rf[0].extended && !rf[2].extended && !rf[3].extended && !rf[4].extended) {
-          var xdistA = lf[0].tipPosition[0] - rf[1].tipPosition[0];
-          var ydistA = lf[0].tipPosition[1] - rf[1].tipPosition[1];
-          var zdistA = lf[0].tipPosition[2] - rf[1].tipPosition[2];
-          var distA = Math.sqrt( xdistA*xdistA + ydistA*ydistA + zdistA*zdistA );
-          // distance between index and thumb
+
+          var distA = tipPosition(0, 1);
           // measuring for distance with letter A
 
-          var xdistI = lf[2].tipPosition[0] - rf[1].tipPosition[0];
-          var ydistI = lf[2].tipPosition[1] - rf[1].tipPosition[1];
-          var zdistI = lf[2].tipPosition[2] - rf[1].tipPosition[2];
-          var distI = Math.sqrt( xdistI*xdistI + ydistI*ydistI + zdistI*zdistI );
-          // distance between index and middle finger
+          var distI = tipPosition(2, 1);
           // measuring for distance with letter I
 
-          var xdistO = lf[3].tipPosition[0] - rf[1].tipPosition[0];
-          var ydistO = lf[3].tipPosition[1] - rf[1].tipPosition[1];
-          var zdistO = lf[3].tipPosition[2] - rf[1].tipPosition[2];
-          var distO = Math.sqrt( xdistO*xdistO + ydistO*ydistO + zdistO*zdistO );
-          // distance between index and ring finger
+          var distO = tipPosition(3, 1);
           // measuring for distance with letter O
 
-          var xdistU = lf[4].tipPosition[0] - rf[1].tipPosition[0];
-          var ydistU = lf[4].tipPosition[1] - rf[1].tipPosition[1];
-          var zdistU = lf[4].tipPosition[2] - rf[1].tipPosition[2];
-          var distU = Math.sqrt( xdistU*xdistU + ydistU*ydistU + zdistU*zdistU );
-          // distance between index and pinky finger
+          var distU = tipPosition(4, 1);
           // measuring for distance with letter U
 
           var xdistY = lf[0].pipPosition[0] - rf[1].tipPosition[0];
@@ -88,11 +86,7 @@ $( document ).ready(function() {
           // distance between index and base of thumb
           // measuring for distance with letter Y
 
-          var xdistE = lf[1].tipPosition[0] - rf[1].tipPosition[0];
-          var ydistE = lf[1].tipPosition[1] - rf[1].tipPosition[1];
-          var zdistE = lf[1].tipPosition[2] - rf[1].tipPosition[2];
-          var distE = Math.sqrt( xdistE*xdistE + ydistE*ydistE + zdistE*zdistE );
-          // distance between index tip of left hand and index tip of right hand
+          var distE = tipPosition(1, 1);
           // measuring for distance with letter E
 
           if ( distA < 20 ){
@@ -167,10 +161,7 @@ $( document ).ready(function() {
           // distance between middle and palm
           // measuring for distance with letter H
 
-          var xdistIndexH = lf[1].tipPosition[0] - rf[4].tipPosition[0];
-          var ydistIndexH = lf[1].tipPosition[1] - rf[4].tipPosition[1];
-          var zdistIndexH = lf[1].tipPosition[2] - rf[4].tipPosition[2];
-          var distIndexH = Math.sqrt( xdistIndexH*xdistIndexH + ydistIndexH*ydistIndexH + zdistIndexH*zdistIndexH );
+          var distIndexH = tipPosition(1, 4);
           // distance between middle and palm
           // measuring for distance with letter W
 
@@ -206,18 +197,15 @@ $( document ).ready(function() {
         var zdistR = rf[0].tipPosition[2] - rf[1].tipPosition[2];
         var rDist = Math.sqrt( xdistR*xdistR + ydistR*ydistR + zdistR*zdistR );
 
-        var xdistThumb = rf[0].tipPosition[0] - lf[0].tipPosition[0];
-        var ydistThumb = rf[0].tipPosition[1] - lf[0].tipPosition[1];
-        var zdistThumb = rf[0].tipPosition[2] - lf[0].tipPosition[2];
-        var thumbDist = Math.sqrt( xdistThumb*xdistThumb + ydistThumb*ydistThumb + zdistThumb*zdistThumb );
+        var thumbDist = tipPosition(0, 0);
 
 
         if ( lDist < 20 && rDist < 20 && thumbDist < 20  ){
           frameString = "B";
           text = 'B'
           voicePlay(text)
-        }
-      } //LETTER B
+        } //LETTER B
+      }
       else if (lf[4].extended && lf[3].extended && lf[2].extended && rf[1].extended) {
         var xdistLeft = lf[0].tipPosition[0] - lf[1].tipPosition[0];
         var ydistLeft = lf[0].tipPosition[1] - lf[1].tipPosition[1];
@@ -254,10 +242,7 @@ $( document ).ready(function() {
         } // LETTER X
       }
       else if (lf[1].extended) {
-        var xdistLeft = lf[1].tipPosition[0] - rf[1].tipPosition[0];
-        var ydistLeft = lf[1].tipPosition[1] - rf[1].tipPosition[1];
-        var zdistLeft = lf[1].tipPosition[2] - rf[1].tipPosition[2];
-        var distLeft = Math.sqrt( xdistLeft*xdistLeft + ydistLeft*ydistLeft + zdistLeft*zdistLeft );
+        var distLeft = tipPosition(1, 1);
         //left index to right index
         // measuring for distance with letter P
 
@@ -276,10 +261,7 @@ $( document ).ready(function() {
       else if (
       lf[1].extended && rf[0].extended && rf[1].extended
       ){
-        var xdistI = lf[1].tipPosition[0] - rf[1].tipPosition[0];
-        var ydistI = lf[1].tipPosition[1] - rf[1].tipPosition[1];
-        var zdistI = lf[1].tipPosition[2] - rf[1].tipPosition[2];
-        var iDist = Math.sqrt( xdistI*xdistI + ydistI*ydistI + zdistI*zdistI );
+        var iDist = tipPosition(1, 1);
 
         var xdistT = lf[1].mcpPosition[0] - rf[0].tipPosition[0];
         var ydistT = lf[1].mcpPosition[1] - rf[0].tipPosition[1];

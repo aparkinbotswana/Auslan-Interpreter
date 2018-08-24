@@ -2,7 +2,8 @@
 
 The purpose of this program is to help bridge the communication gap between those who can sign with Auslan and those who cannot, in real time. Using the Leap Motion, a user is able to sign letters from the alphabet and have it translated to text and speech. Currently, the interpreter is able to recognise the letters A, B, C, D, E, I, O, P, U, X and Y. It is also capable of recognising the Letters G and S, with a little more difficulty.
 
-My live, [Auslan Interpreter](https://aparkinbotswana.github.io/Auslan-Interpreter/) can be found here. Please note that it does require the Leap Motion to work.
+
+My live, [Auslan Interpreter](https://aparkinbotswana.github.io/Auslan-Interpreter/) can be found here. Please note this requires the Leap Motion to work.
 
 See the demo [here](https://www.youtube.com/watch?v=Swy6URGIUbA)
 
